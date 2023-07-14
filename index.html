@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP - Entregable 2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <button id="button-add-div" onclick="mostrar(id, 'add-students-div')">Agregar estudiante</button>
+    <div id="add-students-div">
+        <input type="text" id="dni" placeholder="DNI">
+        <input type="text" id="firstname" placeholder="First Name">
+        <input type="text" id="lastname" placeholder="Last Name">
+        <input type="text" id="email" placeholder="Email">
+        <input type="text" id="cohort" placeholder="Cohort">
+        <input type="text" id="status" placeholder="Status">
+        <input type="text" id="address" placeholder="Address">
+        <input type="text" id="phone" placeholder="Phone">
+        <input type="text" id="gender" placeholder="Gender">
+
+        <button onclick="createStudent()">Enviar</button>
+
+        <div class="alert-success" id="alert-success-create">
+            <strong>Success!</strong><span>Student created</span>
+        </div>
+    </div>
+
+    <br>
+
+    <button id="button-modificar-div" onclick="mostrar(id, 'update-students-div')">Modificar estudiante</button>
+    <div id="update-students-div">
+        <label for="idMod">ID: </label>
+        <input type="text" id="idMod" readonly>
+        <br>
+        <label for="dniMod">DNI: </label>
+        <input type="text" id="dniMod">
+        <br>
+        <label for="firstnameMod">FirstName: </label>
+        <input type="text" id="firstnameMod">
+        <br>
+        <label for="lastnameMod">LastName: </label>
+        <input type="text" id="lastnameMod">
+        <br>
+        <label for="emailMod">Email: </label>
+        <input type="text" id="emailMod">
+        <br>
+        <div id="mas-datos-div">
+            <label for="cohortMod">Cohort: </label>
+            <input type="text" id="cohortMod">
+            <br>
+            <label for="statusMod">Status: </label>
+            <input type="text" id="statusMod">
+            <br>
+            <label for="addressMod">Address: </label>
+            <input type="text" id="addressMod">
+            <br>
+            <label for="phoneMod">Phone: </label>
+            <input type="text" id="phoneMod">
+            <br>
+            <label for="genderMod">Gender: </label>
+            <input type="text" id="genderMod">
+
+        </div>
+        <button id="button-mas-datos" onclick="mostrar(id, 'mas-datos-div')">Más datos</button>
+
+        <button type="button" onclick="updateStudent(idMod.value)">Modificar</button>
+
+        <button onclick="limpiarInputsUpdate()">Limpiar campos</button>
+
+        <div class="alert-success" id="alert-success-update">
+            <strong>Success!</strong><span>Student updated</span>
+        </div>
+    </div>
+
+    <table>
+        <caption>
+            <h3>Listado de estudiantes</h3>
+        </caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>DNI</th>
+                <th>LastName</th>
+                <th>FirstName</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th colspan=2 style="text-align: center;"><span>Cantidad de estudiantes: <span id="cant-estudiantes"></span></span></th>
+            </tr>
+        </thead>
+        <tbody id="table-info-students">
+        </tbody>
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/ba6d807845.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
