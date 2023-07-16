@@ -17,17 +17,32 @@ input {
 }
 
 #button-add-div,
-#button-modificar-div,
-#button-buscar-div {
-    margin-bottom: 25px;
+#button-modificar-div {
     background-color: rgb(220, 198, 255);
     width: 150px;
     height: 25px;
 }
 
+#button-cerrar-add,
+#button-cerrar-update {
+    float: right;
+    border: 1px solid black;
+}
+
 #add-students-div,
 #update-students-div {
+    justify-content: center;
+    text-align: center;
+    padding: 25px;
+    background-color: rgb(0, 183, 255);
     display: none;
+    position: fixed;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, 5%);
+    border: 3px solid black;
+    width: 350px;
+    border-radius: 15px;
 }
 
 .delete-button {
@@ -64,6 +79,5 @@ input {
 .alert-success {
     background-color: rgba(0, 255, 21, 0.568);
     width: 250px;
-    text-align: center;
     display: none;
 }

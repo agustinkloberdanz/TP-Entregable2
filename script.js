@@ -80,7 +80,7 @@ function loadOneStudent(student) {
     document.getElementById('addressMod').value = student.address
     document.getElementById('phoneMod').value = student.phone
 
-    mostrar('button-modificar-div', 'update-students-div')
+    openPopUp('update-students-div')
 }
 
 
@@ -129,7 +129,7 @@ function deleteStudent(id) {
 
 function updateStudent(id) {
     var json = {
-        id: document.getElementById('idMod').value,
+        id: document.getElementById('idMod').value, //id
         dni: document.getElementById('dniMod').value,
         lastName: document.getElementById('lastnameMod').value,
         firstName: document.getElementById('firstnameMod').value,
@@ -157,34 +157,31 @@ function updateStudent(id) {
     }
 }
 
-function mostrar(id, divId) {
-    var div = document.getElementById(divId)
-    div.style.display = 'block'
-    var button = document.getElementById(id)
-    button.addEventListener('click', () => esconder(id, divId))
+function closePopUp(divId) {
+    document.getElementById(divId).style.display = 'none'
+}
 
-    if (button.id != 'button-students-table') {
-        button.style.margin = '0'
+function openPopUp(divId) {
+    document.getElementById(divId).style.display = 'block'
+
+    if (divId == 'add-students-div') {
+        document.getElementById('update-students-div').style.display = 'none'
     }
-
-    if (button.id == 'button-mas-datos') {
-        button.innerHTML = 'Menos datos'
+    if (divId == 'update-students-div') {
+        document.getElementById('add-students-div').style.display = 'none'
     }
 }
 
-function esconder(id, divId) {
-    var div = document.getElementById(divId)
-    div.style.display = 'none'
-    var button = document.getElementById(id)
-    button.addEventListener('click', () => mostrar(id, divId))
+function openMasDatos() {
+    document.getElementById('mas-datos-div').style.display = 'block'
+    document.getElementById('button-mas-datos').innerHTML = 'Menos datos'
+    document.getElementById('button-mas-datos').addEventListener('click', () => closeMasDatos())
+}
 
-    if (button.id != 'button-students-table') {
-        button.style.marginBottom = '25px'
-    }
-
-    if (button.id == 'button-mas-datos') {
-        button.innerHTML = 'Más datos'
-    }
+function closeMasDatos() {
+    document.getElementById('mas-datos-div').style.display = 'none'
+    document.getElementById('button-mas-datos').innerHTML = 'Más datos'
+    document.getElementById('button-mas-datos').addEventListener('click', () => openMasDatos())
 }
 
 function successAlert(type) {

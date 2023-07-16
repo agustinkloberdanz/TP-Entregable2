@@ -11,18 +11,37 @@
 
 <body>
 
-    <button id="button-add-div" onclick="mostrar(id, 'add-students-div')">Agregar estudiante</button>
+    <button id="button-add-div" onclick="openPopUp('add-students-div')">Agregar estudiante</button>
     <div id="add-students-div">
-        <input type="text" id="dni" placeholder="DNI">
-        <input type="text" id="firstname" placeholder="First Name">
-        <input type="text" id="lastname" placeholder="Last Name">
-        <input type="text" id="email" placeholder="Email">
-        <input type="text" id="cohort" placeholder="Cohort">
-        <input type="text" id="status" placeholder="Status">
-        <input type="text" id="address" placeholder="Address">
-        <input type="text" id="phone" placeholder="Phone">
-        <input type="text" id="gender" placeholder="Gender">
-
+        <button id="button-cerrar-add" onclick="closePopUp('add-students-div')">X</button>
+        <h3>Agregar estudiante</h3>
+        <label for="dni">DNI: </label>
+        <input type="text" id="dni">
+        <br>
+        <label for="firstname">FirstName: </label>
+        <input type="text" id="firstname">
+        <br>
+        <label for="lastname">LastName: </label>
+        <input type="text" id="lastname">
+        <br>
+        <label for="email">Email: </label>
+        <input type="text" id="email">
+        <br>
+        <label for="cohort">Cohort: </label>
+        <input type="text" id="cohort">
+        <br>
+        <label for="status">Status: </label>
+        <input type="text" id="status">
+        <br>
+        <label for="address">Address: </label>
+        <input type="text" id="address">
+        <br>
+        <label for="phone">Phone: </label>
+        <input type="text" id="phone">
+        <br>
+        <label for="gender">Gender: </label>
+        <input type="text" id="gender">
+        <br>
         <button onclick="createStudent()">Enviar</button>
 
         <div class="alert-success" id="alert-success-create">
@@ -32,8 +51,10 @@
 
     <br>
 
-    <button id="button-modificar-div" onclick="mostrar(id, 'update-students-div')">Modificar estudiante</button>
+    <button id="button-modificar-div" onclick="openPopUp('update-students-div')">Modificar estudiante</button>
     <div id="update-students-div">
+        <button id="button-cerrar-update" onclick="closePopUp('update-students-div')">X</button>
+        <h3>Modificar estudiante</h3>
         <label for="idMod">ID: </label>
         <input type="text" id="idMod" readonly>
         <br>
@@ -66,9 +87,8 @@
             <input type="text" id="genderMod">
 
         </div>
-        <button id="button-mas-datos" onclick="mostrar(id, 'mas-datos-div')">Más datos</button>
-
-        <button type="button" onclick="updateStudent(idMod.value)">Modificar</button>
+        <button id="button-mas-datos" onclick="openMasDatos()">Más datos</button>
+        <button onclick="updateStudent(idMod.value)">Modificar</button>
 
         <button onclick="cleanInputsUpdate()">Borrar campos</button>
 
