@@ -61,8 +61,9 @@ function loadStudents() {
             })
             document.getElementById('cant-estudiantes').innerHTML = response.data.length
         })
-        .catch(reason => {
-            console.log(Error(reason))
+        .catch(error => {
+            console.log(Error(error))
+            alert(error.message)
         })
 }
 
@@ -103,9 +104,9 @@ function createStudent() {
                 cleanInputsCreate()
                 successAlert('create')
             })
-            .catch(reason => {
-                console.log(Error(reason))
-                alert('Error al crear el estudiante')
+            .catch(error => {
+                console.log(Error(error))
+                alert(error.message)
             })
     } else {
         alert('Error al agregar: Todos los campos son obligatorios!')
@@ -119,9 +120,9 @@ function deleteStudent(id) {
                 loadStudents()
                 alert('Estudiante eliminado.')
             })
-            .catch(reason => {
-                console.log(Error(reason))
-                alert('Error al eliminar el estudiante')
+            .catch(error => {
+                console.log(Error(error))
+                alert(error.message)
             })
     }
 }
@@ -147,9 +148,9 @@ function updateStudent(id) {
                 cleanInputsUpdate()
                 successAlert('update')
             })
-            .catch(reason => {
-                console.log(Error(reason))
-                alert('Error al modificar el estudiante')
+            .catch(error => {
+                console.log(Error(error))
+                alert(error.message)
             })
     } else {
         alert('Error al modificar: Todos los campos son obligatorios!')
