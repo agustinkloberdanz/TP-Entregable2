@@ -42,14 +42,13 @@
         <label for="gender">Gender: </label>
         <input type="text" id="gender">
         <br>
+        <button onclick="cleanInputsCreate()">Borrar campos</button>
         <button onclick="createStudent()">Enviar</button>
 
         <div class="alert-success" id="alert-success-create">
             <strong>Success!</strong><span>Student created</span>
         </div>
     </div>
-
-    <br>
 
     <button id="button-modificar-div" onclick="openPopUp('update-students-div')">Modificar estudiante</button>
     <div id="update-students-div">
@@ -88,14 +87,14 @@
 
         </div>
         <button id="button-mas-datos" onclick="openMasDatos()">Más datos</button>
-        <button onclick="updateStudent(idMod.value)">Modificar</button>
-
         <button onclick="cleanInputsUpdate()">Borrar campos</button>
+        <button onclick="updateStudent(idMod.value)">Enviar</button>
 
         <div class="alert-success" id="alert-success-update">
             <strong>Success!</strong><span>Student updated</span>
         </div>
     </div>
+
 
     <table>
         <caption>
@@ -109,16 +108,19 @@
                 <th>FirstName</th>
                 <th>Email</th>
                 <th>Gender</th>
-                <th colspan=2 style="text-align: center;"><span>Cantidad de estudiantes: <span id="cant-estudiantes"></span></span></th>
+                <th colspan=2 style="text-align: center;"><span>Cantidad de estudiantes: <span
+                            id="cant-estudiantes"></span></span></th>
             </tr>
         </thead>
         <tbody id="table-info-students">
         </tbody>
     </table>
 
+    <script src="https://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="script.js"></script>
     <script src="https://kit.fontawesome.com/ba6d807845.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

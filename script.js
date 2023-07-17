@@ -4,6 +4,11 @@ window.onload = () => {
     loadStudents()
 }
 
+$('#add-students-div').draggable()
+$('#update-students-div').draggable()
+
+
+
 function loadStudents() {
     axios.get(`${url}/getAll`)
         .then(response => {
@@ -129,7 +134,7 @@ function deleteStudent(id) {
 
 function updateStudent(id) {
     var json = {
-        id: document.getElementById('idMod').value, //id
+        id: id,
         dni: document.getElementById('dniMod').value,
         lastName: document.getElementById('lastnameMod').value,
         firstName: document.getElementById('firstnameMod').value,
@@ -162,14 +167,12 @@ function closePopUp(divId) {
 }
 
 function openPopUp(divId) {
-    document.getElementById(divId).style.display = 'block'
-
-    if (divId == 'add-students-div') {
-        document.getElementById('update-students-div').style.display = 'none'
-    }
-    if (divId == 'update-students-div') {
-        document.getElementById('add-students-div').style.display = 'none'
-    }
+    div = document.getElementById(divId)
+    div.style.display = 'block'
+    div.style.left = '35%'
+    div.style.top = '10%'
+    if (divId == 'add-students-div') closePopUp('update-students-div')
+    if (divId == 'update-students-div') closePopUp('add-students-div')
 }
 
 function openMasDatos() {
