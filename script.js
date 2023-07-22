@@ -8,13 +8,15 @@ $('#add-students-div').draggable()
 $('#update-students-div').draggable()
 
 
-
+// PROMESAS AJAX-JQUERY 
 function loadStudents() {
-    axios.get(`${url}/getAll`)
-        .then(response => {
+    $.ajax({
+        url: `${url}/getAll`,
+        type: 'GET',
+        success: (response => {
             var tbody = document.getElementById('table-info-students')
             tbody.innerHTML = ''
-            response.data.forEach(element => {
+            response.forEach(element => {
                 var row = tbody.insertRow()
                 var id = row.insertCell()
                 id.innerHTML = element.id
@@ -64,30 +66,78 @@ function loadStudents() {
                 viewButton.appendChild(i2)
                 view.appendChild(viewButton)
             })
-            document.getElementById('cant-estudiantes').innerHTML = response.data.length
-        })
-        .catch(error => {
+            document.getElementById('cant-estudiantes').innerHTML = response.length
+        }),
+        error: (error => {
             console.log(Error(error))
-            alert(error.message)
+            alert(error.statusText)
         })
+    })
 }
 
+// PROMESAS AXIOS
+// function loadStudents() {
+//     axios.get(`${url}/getAll`)
+//         .then(response => {
+//             var tbody = document.getElementById('table-info-students')
+//             tbody.innerHTML = ''
+//             response.data.forEach(element => {
+//                 var row = tbody.insertRow()
+//                 var id = row.insertCell()
+//                 id.innerHTML = element.id
+//                 var dni = row.insertCell()
+//                 dni.innerHTML = element.dni
+//                 var lastname = row.insertCell()
+//                 lastname.innerHTML = element.lastName
+//                 var firstName = row.insertCell()
+//                 firstName.innerHTML = element.firstName
+//                 var email = row.insertCell()
+//                 email.innerHTML = element.email
+//                 var gender = row.insertCell()
+//                 gender.innerHTML = element.gender
 
-function loadOneStudent(student) {
-    document.getElementById('idMod').value = student.id
-    document.getElementById('dniMod').value = student.dni
-    document.getElementById('lastnameMod').value = student.lastName
-    document.getElementById('firstnameMod').value = student.firstName
-    document.getElementById('emailMod').value = student.email
-    document.getElementById('cohortMod').value = student.cohort
-    document.getElementById('genderMod').value = student.gender
-    document.getElementById('statusMod').value = student.status
-    document.getElementById('addressMod').value = student.address
-    document.getElementById('phoneMod').value = student.phone
+//                 var student = {
+//                     'id': element.id,
+//                     'dni': element.dni,
+//                     'lastName': element.lastName,
+//                     'firstName': element.firstName,
+//                     'email': element.email,
+//                     'cohort': element.cohort,
+//                     'status': element.status,
+//                     'gender': element.gender,
+//                     'address': element.address,
+//                     'phone': element.phone
+//                 }
 
-    openPopUp('update-students-div')
-}
+//                 var eliminar = row.insertCell()
+//                 eliminar.style.border = 0
+//                 eliminar.style.backgroundColor = 'rgb(161, 0, 0)'
+//                 var deleteButton = document.createElement('button')
+//                 deleteButton.className = 'delete-button'
+//                 deleteButton.addEventListener('click', () => deleteStudent(element.id))
+//                 var i = document.createElement('i')
+//                 i.className = 'fa fa-trash-o'
+//                 deleteButton.appendChild(i)
+//                 eliminar.appendChild(deleteButton)
 
+//                 var view = row.insertCell()
+//                 view.style.border = 0
+//                 view.style.backgroundColor = 'rgb(11, 133, 0)'
+//                 var viewButton = document.createElement('button')
+//                 viewButton.className = 'view-button'
+//                 viewButton.addEventListener('click', () => loadOneStudent(student))
+//                 var i2 = document.createElement('i')
+//                 i2.className = 'fa-solid fa-user'
+//                 viewButton.appendChild(i2)
+//                 view.appendChild(viewButton)
+//             })
+//             document.getElementById('cant-estudiantes').innerHTML = response.data.length
+//         })
+//         .catch(error => {
+//             console.log(Error(error))
+//             alert(error.message)
+//         })
+// }
 
 function createStudent() {
     var json = {
@@ -160,6 +210,21 @@ function updateStudent(id) {
     } else {
         alert('Error al modificar: Todos los campos son obligatorios!')
     }
+}
+
+function loadOneStudent(student) {
+    document.getElementById('idMod').value = student.id
+    document.getElementById('dniMod').value = student.dni
+    document.getElementById('lastnameMod').value = student.lastName
+    document.getElementById('firstnameMod').value = student.firstName
+    document.getElementById('emailMod').value = student.email
+    document.getElementById('cohortMod').value = student.cohort
+    document.getElementById('genderMod').value = student.gender
+    document.getElementById('statusMod').value = student.status
+    document.getElementById('addressMod').value = student.address
+    document.getElementById('phoneMod').value = student.phone
+
+    openPopUp('update-students-div')
 }
 
 function closePopUp(divId) {
