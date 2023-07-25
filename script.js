@@ -1,22 +1,21 @@
-const url = 'http://localhost:3000/students'
+// const url = 'http://localhost:3000/students'
+const url = 'https://3f09-181-231-122-56.ngrok-free.app/student'
 
 window.onload = () => {
     loadStudents()
 }
 
+// Hace arrastrable los PopUps con JQuery
 $('#add-students-div').draggable()
 $('#update-students-div').draggable()
 
-
-// PROMESAS AJAX-JQUERY 
+// PROMESAS AXIOS
 function loadStudents() {
-    $.ajax({
-        url: `${url}/getAll`,
-        type: 'GET',
-        success: (response => {
+    axios.get(`${url}/getAll`)
+        .then(response => {
             var tbody = document.getElementById('table-info-students')
             tbody.innerHTML = ''
-            response.forEach(element => {
+            response.data.forEach(element => {
                 var row = tbody.insertRow()
                 var id = row.insertCell()
                 id.innerHTML = element.id
@@ -66,78 +65,13 @@ function loadStudents() {
                 viewButton.appendChild(i2)
                 view.appendChild(viewButton)
             })
-            document.getElementById('cant-estudiantes').innerHTML = response.length
-        }),
-        error: (error => {
-            console.log(Error(error))
-            alert(error.statusText)
+            document.getElementById('cant-estudiantes').innerHTML = response.data.length
         })
-    })
+        .catch(error => {
+            console.log(Error(error))
+            alert(error.message)
+        })
 }
-
-// PROMESAS AXIOS
-// function loadStudents() {
-//     axios.get(`${url}/getAll`)
-//         .then(response => {
-//             var tbody = document.getElementById('table-info-students')
-//             tbody.innerHTML = ''
-//             response.data.forEach(element => {
-//                 var row = tbody.insertRow()
-//                 var id = row.insertCell()
-//                 id.innerHTML = element.id
-//                 var dni = row.insertCell()
-//                 dni.innerHTML = element.dni
-//                 var lastname = row.insertCell()
-//                 lastname.innerHTML = element.lastName
-//                 var firstName = row.insertCell()
-//                 firstName.innerHTML = element.firstName
-//                 var email = row.insertCell()
-//                 email.innerHTML = element.email
-//                 var gender = row.insertCell()
-//                 gender.innerHTML = element.gender
-
-//                 var student = {
-//                     'id': element.id,
-//                     'dni': element.dni,
-//                     'lastName': element.lastName,
-//                     'firstName': element.firstName,
-//                     'email': element.email,
-//                     'cohort': element.cohort,
-//                     'status': element.status,
-//                     'gender': element.gender,
-//                     'address': element.address,
-//                     'phone': element.phone
-//                 }
-
-//                 var eliminar = row.insertCell()
-//                 eliminar.style.border = 0
-//                 eliminar.style.backgroundColor = 'rgb(161, 0, 0)'
-//                 var deleteButton = document.createElement('button')
-//                 deleteButton.className = 'delete-button'
-//                 deleteButton.addEventListener('click', () => deleteStudent(element.id))
-//                 var i = document.createElement('i')
-//                 i.className = 'fa fa-trash-o'
-//                 deleteButton.appendChild(i)
-//                 eliminar.appendChild(deleteButton)
-
-//                 var view = row.insertCell()
-//                 view.style.border = 0
-//                 view.style.backgroundColor = 'rgb(11, 133, 0)'
-//                 var viewButton = document.createElement('button')
-//                 viewButton.className = 'view-button'
-//                 viewButton.addEventListener('click', () => loadOneStudent(student))
-//                 var i2 = document.createElement('i')
-//                 i2.className = 'fa-solid fa-user'
-//                 viewButton.appendChild(i2)
-//                 view.appendChild(viewButton)
-//             })
-//             document.getElementById('cant-estudiantes').innerHTML = response.data.length
-//         })
-//         .catch(error => {
-//             console.log(Error(error))
-//             alert(error.message)
-//         })
-// }
 
 function createStudent() {
     var json = {
@@ -164,7 +98,9 @@ function createStudent() {
                 alert(error.message)
             })
     } else {
-        alert('Error al agregar: Todos los campos son obligatorios!')
+        if (isNaN(document.getElementById('cohort').value)) alert('Cohort es de tipo numérico')
+        else alert('Error al agregar: Todos los campos son obligatorios!')
+
     }
 }
 
@@ -208,7 +144,8 @@ function updateStudent(id) {
                 alert(error.message)
             })
     } else {
-        alert('Error al modificar: Todos los campos son obligatorios!')
+        if (isNaN(document.getElementById('cohortMod').value)) alert('Cohort es de tipo numérico')
+        else alert('Error al agregar: Todos los campos son obligatorios!')
     }
 }
 
@@ -307,7 +244,8 @@ function validateInputsCreate() {
         document.getElementById('gender').value != '' &&
         document.getElementById('status').value != '' &&
         document.getElementById('address').value != '' &&
-        document.getElementById('phone').value != ''
+        document.getElementById('phone').value != '' &&
+        !isNaN(document.getElementById('cohort').value)
     ) return true
 
     return false
@@ -324,7 +262,8 @@ function validateInputsUpdate() {
         document.getElementById('genderMod').value != '' &&
         document.getElementById('statusMod').value != '' &&
         document.getElementById('addressMod').value != '' &&
-        document.getElementById('phoneMod').value != ''
+        document.getElementById('phoneMod').value != '' &&
+        !isNaN(document.getElementById('cohortMod').value)
     ) return true
 
     return false
