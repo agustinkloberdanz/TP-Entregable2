@@ -1,5 +1,5 @@
 // const url = 'http://localhost:3000/students'
-const url = 'https://3f09-181-231-122-56.ngrok-free.app/student'
+const url = ' https://5cf1-2800-2245-9080-5f9-6590-be67-313e-1a16.ngrok-free.app/student'
 
 window.onload = () => {
     loadStudents()
@@ -12,10 +12,10 @@ $('#update-students-div').draggable()
 // PROMESAS AXIOS
 function loadStudents() {
     axios.get(`${url}/getAll`)
-        .then(response => {
+        .then(res => {
             var tbody = document.getElementById('table-info-students')
             tbody.innerHTML = ''
-            response.data.forEach(element => {
+            res.data.forEach(element => {
                 var row = tbody.insertRow()
                 var id = row.insertCell()
                 id.innerHTML = element.id
@@ -65,7 +65,7 @@ function loadStudents() {
                 viewButton.appendChild(i2)
                 view.appendChild(viewButton)
             })
-            document.getElementById('cant-estudiantes').innerHTML = response.data.length
+            document.getElementById('cant-estudiantes').innerHTML = res.data.length
         })
         .catch(error => {
             console.log(Error(error))
@@ -75,15 +75,15 @@ function loadStudents() {
 
 function createStudent() {
     var json = {
-        dni: document.getElementById('dni').value,
-        lastName: document.getElementById('lastname').value,
-        firstName: document.getElementById('firstname').value,
-        email: document.getElementById('email').value,
-        cohort: document.getElementById('cohort').value,
-        gender: document.getElementById('gender').value,
-        status: document.getElementById('status').value,
-        address: document.getElementById('address').value,
-        phone: document.getElementById('phone').value
+        dni: $('#dni').val(),
+        lastName: $('#lastname').val(),
+        firstName: $('#firstname').val(),
+        email: $('#email').val(),
+        cohort: $('#cohort').val(),
+        gender: $('#gender').val(),
+        status: $('#status').val(),
+        address: $('#address').val(),
+        phone: $('#phone').val()
     }
 
     if (validateInputsCreate()) {
@@ -121,15 +121,15 @@ function deleteStudent(id) {
 function updateStudent(id) {
     var json = {
         id: id,
-        dni: document.getElementById('dniMod').value,
-        lastName: document.getElementById('lastnameMod').value,
-        firstName: document.getElementById('firstnameMod').value,
-        email: document.getElementById('emailMod').value,
-        cohort: document.getElementById('cohortMod').value,
-        gender: document.getElementById('genderMod').value,
-        status: document.getElementById('statusMod').value,
-        address: document.getElementById('addressMod').value,
-        phone: document.getElementById('phoneMod').value
+        dni: $('#dniMod').val(),
+        lastName: $('#lastnameMod').val(),
+        firstName: $('#firstnameMod').val(),
+        email: $('#emailMod').val(),
+        cohort: $('#cohortMod').val(),
+        gender: $('#genderMod').val(),
+        status: $('#statusMod').val(),
+        address: $('#addressMod').val(),
+        phone: $('#phoneMod').val()
     }
 
     if (validateInputsUpdate()) {
@@ -150,20 +150,21 @@ function updateStudent(id) {
 }
 
 function loadOneStudent(student) {
-    document.getElementById('idMod').value = student.id
-    document.getElementById('dniMod').value = student.dni
-    document.getElementById('lastnameMod').value = student.lastName
-    document.getElementById('firstnameMod').value = student.firstName
-    document.getElementById('emailMod').value = student.email
-    document.getElementById('cohortMod').value = student.cohort
-    document.getElementById('genderMod').value = student.gender
-    document.getElementById('statusMod').value = student.status
-    document.getElementById('addressMod').value = student.address
-    document.getElementById('phoneMod').value = student.phone
+    $('#idMod').val(student.id) 
+    $('#dniMod').val(student.dni) 
+    $('#lastnameMod').val(student.lastName) 
+    $('#firstnameMod').val(student.firstName) 
+    $('#emailMod').val(student.email) 
+    $('#cohortMod').val(student.cohort) 
+    $('#genderMod').val(student.gender) 
+    $('#statusMod').val(student.status) 
+    $('#addressMod').val(student.address) 
+    $('#phoneMod').val(student.phone) 
 
     openPopUp('update-students-div')
 }
 
+// ABRIR Y CERRAR POPUPS
 function closePopUp(divId) {
     document.getElementById(divId).style.display = 'none'
 }
@@ -177,6 +178,7 @@ function openPopUp(divId) {
     if (divId == 'update-students-div') closePopUp('add-students-div')
 }
 
+// ABRIR Y CERRAR DIV CON DATOS EN EL POPUP PARA MODIFICAR
 function openMasDatos() {
     document.getElementById('mas-datos-div').style.display = 'block'
     document.getElementById('button-mas-datos').innerHTML = 'Menos datos'
@@ -189,6 +191,7 @@ function closeMasDatos() {
     document.getElementById('button-mas-datos').addEventListener('click', () => openMasDatos())
 }
 
+// ALERTAS SUCCESS AL CREAR O MODIFICAR CON EXITO
 function successAlert(type) {
     var div
     if (type == 'update') {
@@ -209,31 +212,34 @@ function successAlert(type) {
     }
 }
 
+// LIMPIAR INPUTS
 function cleanInputsCreate() {
-    document.querySelector('#dni').value = ''
-    document.querySelector('#lastname').value = ''
-    document.querySelector('#firstname').value = ''
-    document.querySelector('#email').value = ''
-    document.querySelector('#cohort').value = ''
-    document.querySelector('#status').value = ''
-    document.querySelector('#address').value = ''
-    document.querySelector('#phone').value = ''
-    document.querySelector('#gender').value = ''
+    $('#id').val('')
+    $('#dni').val('')
+    $('#lastname').val('')
+    $('#firstname').val('')
+    $('#email').val('')
+    $('#cohort').val('')
+    $('#status').val('')
+    $('#address').val('')
+    $('#phone').val('')
+    $('#gender').val('')
 }
 
 function cleanInputsUpdate() {
-    document.querySelector('#idMod').value = ''
-    document.querySelector('#dniMod').value = ''
-    document.querySelector('#lastnameMod').value = ''
-    document.querySelector('#firstnameMod').value = ''
-    document.querySelector('#emailMod').value = ''
-    document.querySelector('#cohortMod').value = ''
-    document.querySelector('#statusMod').value = ''
-    document.querySelector('#addressMod').value = ''
-    document.querySelector('#phoneMod').value = ''
-    document.querySelector('#genderMod').value = ''
+    $('#idMod').val('')
+    $('#dniMod').val('')
+    $('#lastnameMod').val('')
+    $('#firstnameMod').val('')
+    $('#emailMod').val('')
+    $('#cohortMod').val('')
+    $('#statusMod').val('')
+    $('#addressMod').val('')
+    $('#phoneMod').val('')
+    $('#genderMod').val('')
 }
 
+// VALIDAR INPUTS
 function validateInputsCreate() {
     if (
         document.getElementById('dni').value != '' &&
