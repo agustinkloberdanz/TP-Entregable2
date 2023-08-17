@@ -1,16 +1,16 @@
 // const url = 'http://localhost:3000/students'
-const url = ' https://5cf1-2800-2245-9080-5f9-6590-be67-313e-1a16.ngrok-free.app/student'
+const url = 'https://8910-181-231-122-56.ngrok-free.app/student'
 
 window.onload = () => {
-    loadStudents()
+    showStudents()
 }
 
 // Hace arrastrable los PopUps con JQuery
 $('#add-students-div').draggable()
 $('#update-students-div').draggable()
 
-// PROMESAS AXIOS
-function loadStudents() {
+// API AXIOS
+function showStudents() {
     axios.get(`${url}/getAll`)
         .then(res => {
             var tbody = document.getElementById('table-info-students')
@@ -89,7 +89,7 @@ function createStudent() {
     if (validateInputsCreate()) {
         axios.post(url, json)
             .then(() => {
-                loadStudents()
+                showStudents()
                 cleanInputsCreate()
                 successAlert('create')
             })
@@ -108,7 +108,7 @@ function deleteStudent(id) {
     if (window.confirm('¿Está seguro que quiere eliminar al estudiante?')) {
         axios.post(`${url}/${id}/delete`)
             .then(() => {
-                loadStudents()
+                showStudents()
                 alert('Estudiante eliminado.')
             })
             .catch(error => {
@@ -135,7 +135,7 @@ function updateStudent(id) {
     if (validateInputsUpdate()) {
         axios.post(`${url}/${id}/update`, json)
             .then(() => {
-                loadStudents()
+                showStudents()
                 cleanInputsUpdate()
                 successAlert('update')
             })
@@ -150,16 +150,16 @@ function updateStudent(id) {
 }
 
 function loadOneStudent(student) {
-    $('#idMod').val(student.id) 
-    $('#dniMod').val(student.dni) 
-    $('#lastnameMod').val(student.lastName) 
-    $('#firstnameMod').val(student.firstName) 
-    $('#emailMod').val(student.email) 
-    $('#cohortMod').val(student.cohort) 
-    $('#genderMod').val(student.gender) 
-    $('#statusMod').val(student.status) 
-    $('#addressMod').val(student.address) 
-    $('#phoneMod').val(student.phone) 
+    $('#idMod').val(student.id)
+    $('#dniMod').val(student.dni)
+    $('#lastnameMod').val(student.lastName)
+    $('#firstnameMod').val(student.firstName)
+    $('#emailMod').val(student.email)
+    $('#cohortMod').val(student.cohort)
+    $('#genderMod').val(student.gender)
+    $('#statusMod').val(student.status)
+    $('#addressMod').val(student.address)
+    $('#phoneMod').val(student.phone)
 
     openPopUp('update-students-div')
 }
